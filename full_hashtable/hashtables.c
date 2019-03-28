@@ -153,7 +153,7 @@ void hash_table_remove(HashTable *ht, char *key)
     if(!prev) {
       prev = head;
       head = head->next;
-      free(prev);
+      destroy_pair(prev);
       ht->storage[index] = head;
       return;
     }
@@ -209,11 +209,15 @@ char *hash_table_retrieve(HashTable *ht, char *key)
  */
 void destroy_hash_table(HashTable *ht)
 {
-  if (ht != NULL) {
+    for(int i = 0; i < ht->capacity; i++){
+        if(ht->storage[i] != NULL) {
+            destroy_pair(ht->storage[i]);
+        }
+    }
     free(ht->storage);
     free(ht);
-  }
 }
+
 
 /*
   Fill this in.
