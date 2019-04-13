@@ -8,3 +8,5 @@ build
 
 */b_hashtables
 */hashtables
+.idea
+cmake-build-debug
